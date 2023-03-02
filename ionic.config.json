@@ -1,0 +1,8 @@
+{
+  "name": "AI Prototype",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue",
+  "id": "3d7cdf47"
+}
