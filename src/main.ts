@@ -24,7 +24,7 @@ import "@ionic/vue/css/display.css";
 import "./theme/variables.css";
 
 // Status bar
-import { StatusBar, Style } from "@capacitor/status-bar";
+import { StatusBar } from "@capacitor/status-bar";
 StatusBar.setBackgroundColor({ color: "#001489" });
 
 const app = createApp(App).use(IonicVue).use(router);

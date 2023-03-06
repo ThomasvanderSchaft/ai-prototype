@@ -1,15 +1,18 @@
 import { ref } from "vue";
 import {
-  avg_metrics,
-  base_url,
-  companies,
-  customer,
-  customer_company_years,
-  dashboards,
-  industry_averages,
-  metrics,
-  years,
+    avg_metrics,
+    base_url,
+    companies,
+    customer,
+    customer_company_years,
+    dashboards,
+    industry_averages,
+    metrics,
+    years
 } from "./Data";
+import {
+    allNewsItems
+} from "./news";
 
 export const user = ref();
 export const ip = ref(localStorage.getItem("ip") ?? "localhost");
@@ -42,7 +45,7 @@ export const signIn = (ip: string, email: string, password: string) =>
         industry_averages.value = _data.data.industry_averages;
         metrics.value = _data.data.metrics;
         years.value = _data.data.years;
-        console.log(user.value)
+        allNewsItems.value = _data.news.en;
         localStorage.setItem("ip", ip);
         resolve();
       });

@@ -41,7 +41,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import { IonInput, IonButton, IonPage } from "@ionic/vue";
+import { IonInput, IonButton, IonPage, IonSpinner, IonIcon } from "@ionic/vue";
 import { signIn, useAppState } from "@/state/App";
 import { useRouter } from "vue-router";
 import { arrowForwardOutline } from "ionicons/icons";
@@ -73,7 +73,7 @@ export default defineComponent({
       },
     };
   },
-  components: { IonInput, IonPage, IonButton },
+  components: { IonInput, IonPage, IonButton, IonSpinner, IonIcon },
 });
 </script>
 
