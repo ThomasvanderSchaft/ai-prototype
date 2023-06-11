@@ -1,22 +1,19 @@
 <template>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title color="primary">News</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-        <ion-item v-for="article in allNews?.slice(0, 7)" :key="article.id" :href="article.url" detail button>
-          <NewsArticle :article="article" />
-        </ion-item>
-    </ion-card-content>
-  </ion-card>
-
+  <ion-card-header>
+    <ion-card-title color="primary">News</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-label v-if="!allNews">No articles were found</ion-label>
+    <ion-item v-for="article in allNews" :key="article.id" :href="article.url" detail button>
+      <NewsArticle v-if="article" :article="article" />
+    </ion-item>
+  </ion-card-content>
 </template>
 
 <script lang="ts">
 import {computed, defineComponent} from "vue";
 import {
   IonCardTitle,
-  IonCard,
   IonCardHeader,
   IonItem,
   IonCardContent
@@ -27,7 +24,7 @@ export default defineComponent({
   name: 'NewsSection',
   props: {
     news: { required: false, type: Object },
-    companies: { required: false, type: Object },
+    companyId: { required: false, type: String}
   },
   setup(props) {
     const allNews = computed(() => {
@@ -35,11 +32,14 @@ export default defineComponent({
       Object.keys(props?.news?.value ?? {}).map((companyId) => {
         if (props?.news?.value) {
           props?.news?.value[companyId].map((newsItem) => {
-            result.push({...newsItem, companyId})
+            props.companyId ?
+            newsItem.company == props.companyId ?
+                result.push({...newsItem, companyId}) :
+                "" : result.push({...newsItem, companyId})
           })
         }
       })
-
+      props.companyId ? result?.slice(0, 7) : ""
       return result.length > 0
           ? result.sort(
               (a, b) => Date.parse(`${b.published}`) - Date.parse(`${a.published}`)
@@ -54,7 +54,6 @@ export default defineComponent({
   components: {
     NewsArticle,
     IonCardTitle,
-    IonCard,
     IonCardHeader,
     IonCardContent,
     IonItem,

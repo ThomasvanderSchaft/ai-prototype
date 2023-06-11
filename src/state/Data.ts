@@ -14,6 +14,19 @@ export const years = ref();
 export const getCompanyNameById = (companyId?: string) =>
     companyId && companies.value?.[companyId]?.display_name
 
+export const getCompanyYears = (companyId: string) => {
+    const foundYears: number[] = []
+    Object.keys(metrics.value?.[companyId] ?? {}).map((metricName) => {
+        Object.keys(metrics.value?.[companyId][metricName] ?? {}).map((year) => {
+            if (!foundYears.includes(parseInt(year)) && !isNaN(parseInt(year))) {
+                foundYears.push(parseInt(year))
+            }
+        })
+    })
+
+    return foundYears.sort()
+}
+
 // Calculate the highest year in which > 55% of company data is available
 const fiftyFivePercentYear = computed(() => {
   let resultYear = 0
@@ -68,5 +81,6 @@ export const useDataState = () => {
     years,
     metricsPerYear,
     fiftyFivePercentYear,
+    getCompanyYears
   };
 };

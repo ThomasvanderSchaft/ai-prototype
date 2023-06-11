@@ -46,7 +46,7 @@ export default defineComponent({
       formatPercentage,
       formatMetricValue,
       handleOnCompanyRowClick: (id: string) =>
-          router.push({ name: 'Company-detail-highlights', params: { id } }),
+          router.replace({ name: 'CompanyDetail', params: { id } }),
     }
   },
   components: {

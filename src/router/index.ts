@@ -25,16 +25,22 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/views/Home/Index.vue"),
       },
       {
-        path: "benchmarks",
-        component: () => import("@/views/Benchmark/Index.vue"),
+        path: "news",
+        component: () => import("@/views/News/Index.vue"),
+      },
+      {
+        path: 'companies/:id',
+        name: 'CompanyDetail',
+        component: () => import("@/views/Companies/Details.vue"),
       },
       {
         path: "companies",
         component: () => import("@/views/Companies/Index.vue"),
+
       },
       {
-        path: "more",
-        component: () => import("@/views/More/Index.vue"),
+        path: "profile",
+        component: () => import("@/views/Companies/Details.vue"),
       },
     ],
   },

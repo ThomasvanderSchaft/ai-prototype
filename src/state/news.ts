@@ -17,6 +17,5 @@ export const allNewsItems = ref<NewsItemType[]>()
 export const useNewsState = () => {
     // Localized news
     const news = computed(() => allNewsItems)
-    console.log(news)
     return { news }
 }

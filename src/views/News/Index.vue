@@ -2,17 +2,15 @@
   <ion-page>
     <ion-header>
       <ion-toolbar color="primary">
-        <ion-title>Benchmarks</ion-title>
+        <ion-title>News</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
-          <ion-title size="large">Benchmarks</ion-title>
+          <ion-title size="large">News</ion-title>
         </ion-toolbar>
       </ion-header>
-
-      <ExploreContainer name="Benchmark page" />
     </ion-content>
   </ion-page>
 </template>
@@ -25,5 +23,4 @@ import {
   IonTitle,
   IonContent,
 } from "@ionic/vue";
-import ExploreContainer from "@/components/ExploreContainer.vue";
 </script>

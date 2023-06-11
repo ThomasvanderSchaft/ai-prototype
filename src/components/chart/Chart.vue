@@ -1,55 +1,48 @@
 <template>
   <div>
-    <ion-card :id="`${name}-wrapper`">
-      <ion-card-header>
-        <ion-card-title color="primary">Net Sales</ion-card-title>
-      </ion-card-header>
-      <MixedChart
-        v-if="type === 'mixed'"
-        :datasets="datasets"
-        :visual="visual"
-        :axes="axes"
-        :xAxisGrouping="xAxisGrouping"
-        :companyId="companyId"
-        ref="mixedChart"
-        :name="name"
-        class="chart"
-        :numberFormatting="numberFormatting"
-        :sizeIndicator="sizeIndicator"
-        :referenceLine="referenceLine"
-      />
-    </ion-card>
+    <ion-card-header>
+      <ion-card-title color="primary">{{ title }}</ion-card-title>
+    </ion-card-header>
+    <MixedChart
+      :datasets="datasets"
+      :visual="visual"
+      :axes="axes"
+      :xAxisGrouping="xAxisGrouping"
+      :companyId="companyId"
+      ref="mixedChart"
+      :name="name"
+      class="chart"
+      :numberFormatting="numberFormatting"
+      :sizeIndicator="sizeIndicator"
+      :referenceLine="referenceLine"
+    />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent, PropType } from "vue";
 
-import MixedChart, { MixedChartDatasetType } from './MixedChart.vue'
-import {
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-} from "@ionic/vue";
+import MixedChart, { MixedChartDatasetType } from "./MixedChart.vue";
+import { IonCardHeader, IonCardTitle } from "@ionic/vue";
 
 export interface VisualSettings {
-  legend?: boolean
-  aspectRatio?: number
+  legend?: boolean;
+  aspectRatio?: number;
   line?: {
-    tension?: number
-  }
+    tension?: number;
+  };
   bar?: {
-    width: number
-  }
+    width: number;
+  };
 }
 
 export type AutomaticDatasetType =
-    | 'companyYears'
-    | 'companySpecialMetric'
-    | 'bubbleCompanies'
+  | "companyYears"
+  | "companySpecialMetric"
+  | "bubbleCompanies";
 
 export default defineComponent({
-  name: 'Chart',
+  name: "Chart",
   props: {
     // Name of the chart for unique identification + export
     name: { type: String, required: true },
@@ -57,19 +50,12 @@ export default defineComponent({
     title: { type: String, required: false },
     visual: { type: Object as PropType<VisualSettings>, required: false },
     numberFormatting: {
-      type: String as PropType<'k' | 'm' | 'b' | 'auto'>,
-      default: 'auto',
+      type: String as PropType<"k" | "m" | "b" | "auto">,
+      default: "auto",
       required: false,
     },
     sizeIndicator: { type: String, required: false },
     hint: { type: String, required: false },
-
-    // Chart settings
-    type: {
-      type: String as PropType<'mixed' | 'bubble'>,
-      required: false,
-      default: 'mixed',
-    },
     datasets: {
       required: false,
       type: Array as PropType<MixedChartDatasetType[]>,
@@ -77,27 +63,27 @@ export default defineComponent({
 
     companyId: {
       required: false,
-      type: String
+      type: String,
     },
 
     // Mixed chart
     axes: { type: Object as PropType<AxisType>, required: false },
     xAxisGrouping: {
-      type: String as PropType<'year' | 'dataset'>,
+      type: String as PropType<"year" | "dataset">,
       required: false,
-      default: 'year',
+      default: "year",
     },
     // Render a reference line
     referenceLine: {
       type: Function as PropType<
-          () => { title?: string; value: number; color?: string }
+        () => { title?: string; value: number; color?: string }
       >,
       required: false,
     },
 
     // Global
     actions: {
-      type: Array as PropType<('exportImg' | 'exportCSV' | 'fullscreen')[]>,
+      type: Array as PropType<("exportImg" | "exportCSV" | "fullscreen")[]>,
       required: false,
     },
     // Function that evaluates the dataset color
@@ -105,17 +91,16 @@ export default defineComponent({
     hideLegend: { type: Boolean, required: false },
   },
   components: {
-    IonCard,
     IonCardHeader,
     IonCardTitle,
     MixedChart,
   },
-})
+});
 
 export interface AxisType {
-  x?: { label?: string }
-  y?: { label?: string; position?: 'left' | 'right' }
-  y1?: { label?: string; position?: 'left' | 'right' }
+  x?: { label?: string };
+  y?: { label?: string; position?: "left" | "right" };
+  y1?: { label?: string; position?: "left" | "right" };
 }
 </script>
 <style lang="scss" scoped>

@@ -1,21 +1,13 @@
 <template>
   <ion-page class="login-page">
     <div class="content">
-      <img src="../assets/svg/login-logo.svg" alt="A-INSIGHTS logo">
+      <img src="../assets/svg/login-logo.svg" alt="A-INSIGHTS logo" />
       <h2>Login</h2>
       <p>Not a customer? Return to our webite or <a href="">contact us</a></p>
       <form>
-        <label for="IP">IP</label>
-        <ion-input
-            class="text-input"
-          label="IP"
-          label-placement="floating"
-          placeholder="Enter your IP here"
-          v-model="ip"
-        />
         <label for="E-mail">Email</label>
         <ion-input
-            class="text-input"
+          class="text-input"
           label="E-mail"
           label-placement="floating"
           placeholder="Enter your e-mail here"
@@ -23,7 +15,7 @@
         />
         <label for="Password">Password</label>
         <ion-input
-            class="text-input"
+          class="text-input"
           label="Password"
           label-placement="floating"
           placeholder="Enter your password here"
@@ -31,8 +23,19 @@
           v-model="password"
         />
         <ion-button class="button" color="white" @click="handleSignIn">
-          <div v-if="result"><ion-spinner color="primary" name="circles"></ion-spinner>&nbsp;{{ result }}</div>
-          <div v-else>Login <ion-icon slot="end" aria-hidden="true" :icon="arrowForwardOutline"></ion-icon></div>
+          <div v-if="result">
+            <ion-spinner color="primary" name="circles"></ion-spinner>&nbsp;{{
+              result
+            }}
+          </div>
+          <div v-else>
+            Login
+            <ion-icon
+              slot="end"
+              aria-hidden="true"
+              :icon="arrowForwardOutline"
+            ></ion-icon>
+          </div>
         </ion-button>
       </form>
     </div>
@@ -68,7 +71,7 @@ export default defineComponent({
         result.value = "Getting you signed in!";
         if (email.value && password.value) {
           await signIn(ip.value, email.value, password.value);
-          router.replace({ path: "/home" });
+          await router.replace({ path: "/home" });
         }
       },
     };
@@ -116,7 +119,9 @@ export default defineComponent({
     color: var(--white);
     display: block;
   }
-  label:after { content: ": " }
+  label:after {
+    content: ": ";
+  }
   .text-input {
     margin-bottom: 1rem;
     height: var(--input-height);

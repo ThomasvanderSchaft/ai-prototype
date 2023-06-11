@@ -1,10 +1,6 @@
 <template>
   <ion-page>
-    <ion-header>
-      <ion-toolbar color="white">
-        <img src="../../assets/img/logo.png" alt="A-INSIGHTS logo">
-      </ion-toolbar>
-    </ion-header>
+    <MainHeader/>
     <ion-content :fullscreen="true">
       <ion-card>
         <ion-card-header collapse="condense">
@@ -13,10 +9,10 @@
           </ion-toolbar>
         </ion-card-header>
         <ion-list>
-          <ion-item
-              v-for="company in companyList"
-              :key="company.id"
-              href="javascript:void"
+          <router-link  v-for="company in companyList"
+                        :key="company.id" :to="{path: `companies/${company.id}`}">
+            <ion-item
+
               detail
           >
             <ion-avatar slot="start">
@@ -27,6 +23,7 @@
               <p>{{ company.legal_entity }}</p>
             </ion-label>
           </ion-item>
+          </router-link>
         </ion-list>
       </ion-card>
     </ion-content>
@@ -35,10 +32,9 @@
 
 <script lang="ts">
 import { computed, defineComponent } from "vue";
+import MainHeader from "@/components/headers/MainHeader.vue";
 import {
   IonPage,
-  IonHeader,
-  IonToolbar,
   IonTitle,
   IonContent,
   IonList,
@@ -46,11 +42,11 @@ import {
   IonLabel,
 } from "@ionic/vue";
 import { useDataState } from "@/state/Data";
-
 export default defineComponent({
   name: "CompaniesPage",
   setup() {
     const { companies } = useDataState();
+
     return {
       companyList: computed(() =>
         Object.keys(companies.value).map((companyId) => ({
@@ -61,13 +57,12 @@ export default defineComponent({
   },
   components: {
     IonPage,
-    IonHeader,
-    IonToolbar,
     IonTitle,
     IonContent,
     IonList,
     IonItem,
     IonLabel,
+    MainHeader
   },
 });
 </script>
@@ -81,6 +76,14 @@ ion-card {
 }
 ion-header {
   background: var(--white);
+}
+ion-label {
+
+  h3 {
+    font-size: 1rem;
+    text-decoration: none;
+    text-underline: none;
+  }
 }
 img {
   width: 5rem;
